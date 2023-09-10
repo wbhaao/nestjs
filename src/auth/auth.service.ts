@@ -3,14 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import * as bcrypt from 'bcryptjs';
-import { JwtModule } from '@nestjs/jwt';
+// 여기를 몾듈로 잘못적어서 버그가 났음
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
-    private jwtService: JwtModule,
+    private jwtService: JwtService,
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
